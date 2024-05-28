@@ -1,7 +1,15 @@
 
-document.getElementById('get-weather-btn').addEventListener('click', function () {
+document.getElementById('get-weather-btn').addEventListener('click', getWeather);
+
+document.getElementById('city-input').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        getWeather();
+    }
+});
+
+function getWeather() {
     const city = document.getElementById('city-input').value;
-    const apiKey = 'cc8c5cb6188ee3f8e9be3c5f665d6e27'; 
+    const apiKey = 'cc8c5cb6188ee3f8e9be3c5f665d6e27';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     fetch(url)
@@ -24,5 +32,5 @@ document.getElementById('get-weather-btn').addEventListener('click', function ()
             console.error('Error fetching weather data:', error);
             document.getElementById('weather-details').innerHTML = '<p>Error fetching weather data. Please try again.</p>';
         });
-});
+}
 
